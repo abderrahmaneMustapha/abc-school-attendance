@@ -18,7 +18,7 @@ export class Employee {
   @Column()
   firstName: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamptz' })
   dateCreated: Date;
 
   @Column()
