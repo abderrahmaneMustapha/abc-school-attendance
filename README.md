@@ -136,7 +136,31 @@ Run the unit tests for this system using:
 npm run test
 ```
 
-For integration tests run:
+For integration tests  you first need to prepare a new `.env.test` file:
+
+```env
+NODE_ENV=test
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5433
+DB_USERNAME=test-user
+DB_PASSWORD=test123
+DB_DATABASE=test-db
+TYPEORM_SYNCHRONIZE=true
+TYPEORM_LOGGING=true
+TYPEORM_AUTO_LOAD_ENTITIES=true
+POSTGRES_DB=test-db
+POSTGRES_USER=test-user
+POSTGRES_PASSWORD=test123
+```
+
+After this you build and start the production containers with Docker Compose:
+
+```sh
+docker-compose -f docker-compose.spec.yml up -d
+```
+
+And then you can run your integration tests by doing:
 
 ```sh
 npm run test:e2e
