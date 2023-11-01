@@ -41,7 +41,7 @@ These instructions will get you a copy of the project up and running on your loc
 Clone the repository:
 
 ```sh
-git clone https://github.com/your-repo/abc-school-attendance.git
+git clone https://github.com/abderrahmaneMustapha/abc-school-attendance.git
 cd abc-school-attendance
 ```
 
