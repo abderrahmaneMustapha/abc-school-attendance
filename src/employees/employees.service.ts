@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Attendance, Employee } from './employess.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { CheckInOutDto } from './dto/check-in-out.dto';
 
@@ -21,8 +21,14 @@ export class EmployeesService {
 
   async findAll(dateCreated?: Date): Promise<Employee[]> {
     if (dateCreated) {
+      const date = new Date(dateCreated);
+      const startDate = new Date(date.setHours(0, 0, 0, 0));
+      const endDate = new Date(date);
+      endDate.setHours(23, 59, 59, 999);
       return await this.employeeRepository.find({
-        where: { dateCreated },
+        where: {
+          dateCreated: Between(startDate, endDate),
+        },
       });
     }
     return await this.employeeRepository.find();
