@@ -106,13 +106,6 @@ export class EmployeesController {
     schema: {
       example: {
         id: '123e4567-e89b-12d3-a456-426614174000',
-        employee: {
-          id: '123e4567-e89b-12d3-a456-426614174001',
-          lastName: 'Doe',
-          firstName: 'John',
-          dateCreated: '2023-11-01T12:00:00Z',
-          department: 'Development',
-        },
         checkIn: '2023-11-01T08:00:00Z',
         checkOut: '2023-11-01T17:00:00Z',
         comment: 'Checked out on time.',
