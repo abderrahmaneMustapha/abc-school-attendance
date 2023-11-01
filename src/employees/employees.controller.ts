@@ -3,7 +3,7 @@ import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { EmployeesService } from './employees.service';
 import { CheckInOutDto } from './dto/check-in-out.dto';
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
-import { Attendance, Employee } from './employess.entity';
+import { Attendance, Employee } from './employees.entity';
 
 @Controller('')
 export class EmployeesController {

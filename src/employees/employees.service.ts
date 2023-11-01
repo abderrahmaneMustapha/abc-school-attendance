@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Attendance, Employee } from './employess.entity';
+import { Attendance, Employee } from './employees.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
