@@ -67,6 +67,9 @@ export class EmployeesService {
 
     attendance.checkOut = new Date();
     attendance.comment = checkInOutDto.comment;
+    const duration =
+      attendance.checkOut.getTime() - attendance.checkIn.getTime();
+    attendance.duration = duration;
 
     await this.attendanceRepository.save(attendance);
 

@@ -42,4 +42,7 @@ export class Attendance {
 
   @Column({ nullable: true })
   comment: string;
+
+  @Column('bigint', { nullable: true })
+  duration: number;
 }
