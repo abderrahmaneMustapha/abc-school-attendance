@@ -3,16 +3,17 @@ import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { EmployeesService } from './employees.service';
 import { CheckInOutDto } from './dto/check-in-out.dto';
 
-@Controller('employees')
+@Controller('')
 export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
 
-  @Post()
+  @Post('/employees')
   create(@Body() createEmployeeDto: CreateEmployeeDto) {
+    console.log(createEmployeeDto);
     return this.employeesService.create(createEmployeeDto);
   }
 
-  @Get()
+  @Get('/employees')
   findAll(@Query('dateCreated') dateCreated?: Date) {
     return this.employeesService.findAll(dateCreated);
   }
