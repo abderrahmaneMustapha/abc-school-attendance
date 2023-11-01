@@ -1,73 +1,147 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# ABC School Employee Attendance API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This API is used to manage employee check-ins and check-outs at ABC School, tracking attendance and calculating the duration of each work period.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- Create new employees
+- Retrieve a list of employees with optional filters by date of creation
+- Check-in employees to track attendance start
+- Check-out employees to track attendance end and calculate the duration
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Additionally, the API is fully documented using OpenAPI and Swagger UI. This documentation provides a clear and interactive way of understanding the available endpoints, their required parameters, and the structure of the expected responses.
 
-## Installation
+## API Documentation
 
-```bash
-$ npm install
+To access the interactive API documentation:
+
+1. Start the API server on your local machine.
+2. Open a web browser and navigate to `http://localhost:3000/api`.
+3. The Swagger UI will be displayed, allowing you to test endpoints directly through the browser.
+
+By using Swagger UI, you can:
+
+- Explore the list of available endpoints.
+- Send test requests to the API and view the responses.
+- Review the request models and response schemas.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Nodejs version v16.19.0 or higher (we recommend using nvm).
+- Git.
+- Docker (optional, for running the database in a container).
+- Nestjs.
+
+### Installing
+
+Clone the repository:
+
+```sh
+git clone https://github.com/your-repo/abc-school-attendance.git
+cd abc-school-attendance
 ```
 
-## Running the app
+Install dependencies:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm install
 ```
 
-## Test
+## Running with Docker
 
-```bash
-# unit tests
-$ npm run test
+To facilitate a consistent development environment and simplify the production deployment process, this project is configured to run with Docker.
 
-# e2e tests
-$ npm run test:e2e
+### Development Environment Setup
 
-# test coverage
-$ npm run test:cov
+For local development, we run only the database service in Docker, while the application runs on the host machine.
+
+#### Setting Up the Database with Docker
+
+Create a `.env.dev` file with the necessary environment variables:
+
+```env
+NODE_ENV=development
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=ABC-test-user
+DB_PASSWORD=test123
+DB_DATABASE=ABC-test
+TYPEORM_SYNCHRONIZE=true
+TYPEORM_LOGGING=true
+TYPEORM_AUTO_LOAD_ENTITIES=true
+POSTGRES_DB=dev-db
+POSTGRES_USER=dev-user
+POSTGRES_PASSWORD=dev-pass
 ```
 
-## Support
+Start the database with Docker Compose:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```sh
+docker-compose -f docker-compose.dev.yml up -d
+```
 
-## Stay in touch
+#### Running the Application for Development
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Start the application on your local machine with:
 
-## License
+```sh
+npm run start:dev
+```
 
-Nest is [MIT licensed](LICENSE).
+### Production Environment Setup
+
+In production, both the application and the database run in Docker containers.
+
+#### Setting Up the Production Environment
+
+Create a `.env.prod` file with the production environment variables:
+
+```env
+NODE_ENV=production
+DB_TYPE=postgres
+DB_HOST=db
+DB_PORT=5432
+DB_USERNAME=ABC-test-user
+DB_PASSWORD=test123
+DB_DATABASE=ABC-test
+TYPEORM_SYNCHRONIZE=false
+TYPEORM_LOGGING=true
+TYPEORM_AUTO_LOAD_ENTITIES=true
+POSTGRES_DB=ABC-test
+POSTGRES_USER=ABC-test-user
+POSTGRES_PASSWORD=test123
+```
+
+Build and start the production containers with Docker Compose:
+
+```sh
+docker-compose up --build -d
+```
+
+## Configuration
+
+Configure your database connection settings in `.env.dev` for developement and
+`.env.prod` or directly in the TypeORM configuration in `src/app.module.ts`.
+
+## Tests
+
+Run the unit tests for this system using:
+
+```sh
+npm run test
+```
+
+For integration tests run:
+
+```sh
+npm run test:e2e
+```
+
+## Authors
+
+- Abderahmane Toumi - abderrahmaneMustapha
