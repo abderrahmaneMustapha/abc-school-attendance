@@ -5,8 +5,17 @@ import { EmployeesModule } from './employees/employees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 
-const envFilePath =
-  process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev';
+let envFilePath;
+
+if (process.env.NODE_ENV === 'production') {
+  envFilePath = '.env.prod';
+} else if (process.env.NODE_ENV === 'test') {
+  envFilePath = '.env.test';
+} else {
+  envFilePath = '.env.dev';
+}
+console.log(envFilePath);
+
 dotenv.config({ path: envFilePath });
 
 @Module({
